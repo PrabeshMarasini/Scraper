@@ -2,11 +2,9 @@ import scrapy
 
 def headingsScrape(response):
     headings = {}
-    for i in range(1, 7):
-        heading_tag = f'h{i}'
-        heading = response.css(f'{heading_tag}::text').getall()
-
-        if not heading:
-            heading = ["No headings found"]
-        headings[heading_tag] = heading
+    for tag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+        texts = response.css(f'{tag}::text').getall()  
+        texts = [text.strip() for text in texts if text.strip()]  
+        headings[tag] = texts if texts else [f"No {tag.upper()} headings found"]  
+        
     return headings
