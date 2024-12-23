@@ -10,6 +10,7 @@ from htmlelements.section import sectionScrape
 from htmlelements.span import spanScrape
 from htmlelements.ul import ulScrape
 from htmlelements.a import aScrape
+from htmlelements.div import divScrape
 
 class Scraper(scrapy.Spider):
     name = "html_scraper"
@@ -31,6 +32,7 @@ class Scraper(scrapy.Spider):
         span = spanScrape(response)
         ul = ulScrape(response)
         a = aScrape(response)
+        div = divScrape(response)
         
         print(f"Page Title: {title}")
         
@@ -42,6 +44,10 @@ class Scraper(scrapy.Spider):
         print("ARTICLES:")
         for article in article:
             print(f"  - {article}")
+
+        print("DIVS:")
+        for div in div:
+            print(f" - {div}")
         
         print("LIST ITEMS:")
         for item in li:
